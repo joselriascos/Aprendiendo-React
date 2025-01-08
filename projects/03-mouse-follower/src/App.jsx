@@ -1,3 +1,4 @@
+import { use } from 'react'
 import { useEffect, useState } from 'react'
 
 function App() {
@@ -8,7 +9,6 @@ function App() {
   useEffect(() => {
     const handleMove = (event) => {
       const { clientX, clientY } = event
-      console.log(clientX, clientY)
       setPosition({ x: clientX, y: clientY })
     }
     if (enabled) {
@@ -21,6 +21,13 @@ function App() {
       // nuevamente
       window.removeEventListener("pointermove", handleMove)
       setPosition({ x: 0, y: 0 })
+    }
+  }, [enabled])
+
+  useEffect(() => {
+    document.body.classList.toggle("no-cursor", enabled)
+    return () => {
+      document.body.classList.remove("no-cursor")
     }
   }, [enabled])
 
