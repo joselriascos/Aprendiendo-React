@@ -6,7 +6,6 @@ import { TURNS } from '../utils/constants'
 import { checkWinnerFrom, checkEndGame } from '../logic/board'
 
 export function Board() {
-
   const [board, setBoard] = useState(() => {
     const savedBoard = window.localStorage.getItem('board')
     return savedBoard ? JSON.parse(savedBoard) : Array(9).fill(null)
@@ -38,12 +37,12 @@ export function Board() {
     // Comprobar si hay un ganador
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
-        confetti()
-        setWinner(newWinner)// La actualización de los estados es asíncrona
-        return
+      confetti()
+      setWinner(newWinner) // La actualización de los estados es asíncrona
+      return
     } else if (checkEndGame(newBoard)) {
-        setWinner(false)
-        return
+      setWinner(false)
+      return
     }
 
     // Cambiar de turno
@@ -69,26 +68,21 @@ export function Board() {
       <h1>Tic tac toe</h1>
       <button onClick={resetGame}>Reset del juego</button>
       <section className="game">
-        {
-          board.map((_, index) => {
-            return (
-              <Square
-                key={index}
-                index={index}
-                updateBoard={updateBoard}>
-                  {board[index]}
-              </Square>
-            )
-          })
-        }
+        {board.map((_, index) => {
+          return (
+            <Square key={index} index={index} updateBoard={updateBoard}>
+              {board[index]}
+            </Square>
+          )
+        })}
       </section>
 
       <section className="turn">
-        <Square isSelected = {turn === TURNS.X}>{TURNS.X}</Square>
-        <Square isSelected = {turn === TURNS.O}>{TURNS.O}</Square>
+        <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
+        <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
       </section>
 
-      <WinnerModal winner = {winner} resetGame = {resetGame}/>
+      <WinnerModal winner={winner} resetGame={resetGame} />
     </main>
   )
 }
