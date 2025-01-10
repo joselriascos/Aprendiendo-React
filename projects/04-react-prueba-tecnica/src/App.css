@@ -1,0 +1,28 @@
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-family: system-ui;
+}
+
+img{
+    cursor: pointer;
+}
+
+/* section{
+    display: flex;
+    gap: 20px;
+
+    p{
+        text-align: justify;
+        line-height: 1em;
+    }
+
+    img{
+        width: 60%;
+        max-width: 320px;
+    }
+} */
