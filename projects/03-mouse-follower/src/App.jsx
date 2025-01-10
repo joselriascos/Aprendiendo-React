@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-function App() {
+function FollowMouse() {
   const [enabled, setEnabled] = useState(false)
   const [position, setPosition] = useState({ x: 0, y: 0 })
 
@@ -54,4 +54,4 @@ function App() {
   )
 }
 
-export default App
+export default FollowMouse
