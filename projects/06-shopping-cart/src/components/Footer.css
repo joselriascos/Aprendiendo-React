@@ -1,0 +1,35 @@
+.footer{
+    position: sticky;
+    left: 16px;
+    bottom: 16px;
+    text-align: left;
+    background-color: rgba(0, 0, 0, .7);
+    padding: 8px 24px;
+    border-radius: 32px;
+    opacity: .95;
+    backdrop-filter: blur(2px);
+    width: fit-content;
+}
+
+.footer span{
+    font-size: 0.9em;
+    color: #09F;
+    opacity: .8;
+}
+
+.footer h4, .footer h5{
+    margin: 0;
+    display: flex;
+}
+
+
+.footer a{
+    color: inherit;
+    transition: .1s text-decoration ease;
+}
+
+@media (min-width: 768px){
+    .footer a:hover{
+        text-decoration: none;
+    }
+}
