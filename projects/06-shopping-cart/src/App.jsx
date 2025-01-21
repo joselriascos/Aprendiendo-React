@@ -10,7 +10,7 @@ function App() {
   const { filterProducts } = useFilters()
 
   const filteredProducts = filterProducts(initialProducts)
-  
+
   return (
     <CartProvider>
       <Header />

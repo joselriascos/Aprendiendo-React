@@ -43,7 +43,12 @@ export function Cart() {
         {cart.length > 0 && !isCartOpen && <span>{cart.length}</span>}
         <CartIcon />
       </label>
-      <input type="checkbox" id={cartCheckboxId} hidden onChange={handleChange}/>
+      <input
+        type="checkbox"
+        id={cartCheckboxId}
+        hidden
+        onChange={handleChange}
+      />
 
       <aside className="cart">
         <ul>
