@@ -65,12 +65,12 @@ export function Cart() {
         </ul>
 
         {cart.length > 0 && (
-          <footer>
+          <div>
             <p className="total-price">Total: $ {total}</p>
             <button onClick={clearCart} className="clear-cart">
               <ClearCartIcon />
             </button>
-          </footer>
+          </div>
         )}
       </aside>
     </>
