@@ -7,7 +7,7 @@ import { Suspense } from 'react'
 import Error404 from './pages/404.jsx'
 import { Loading } from './Components/Loading.jsx'
 import { ConfSection } from './Components/ConfSection.jsx'
-import { Route } from './pages/Route.jsx'
+import { Route } from './Components/Route.jsx'
 import { Router } from './Router.jsx'
 
 const AboutPage = lazy(() => import('./pages/About.jsx')) // => import dinámico, se carga solo cuando se necesite
