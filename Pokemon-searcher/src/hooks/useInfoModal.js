@@ -1,34 +1,28 @@
-import { useState, useEffect } from "react"
-import { API_FCC } from "../utils/consts.js"
-import { fetchData } from "../utils/functions.js"
+import { useState, useEffect } from 'react'
+import { API_FCC_PREFIX } from '../utils/consts.js'
+import { fetchData } from '../utils/functions.js'
 
 export function useInfoModal({ id }) {
   const [data, setData] = useState(null)
   const [actualImage, setActualImage] = useState('front_default')
-  
 
-  const nextImage = () => {
+  const changeImage = (next) => {
     if (data?.sprites) {
       const spriteKeys = Object.keys(data.sprites)
       const currentKey = spriteKeys.indexOf(actualImage)
-      const nextKey = (currentKey + 1) % spriteKeys.length
-      setActualImage(spriteKeys[nextKey])
+      const newKey = next
+        ? (currentKey + 1) % spriteKeys.length
+        : (currentKey - 1 + spriteKeys.length) % spriteKeys.length
+      setActualImage(spriteKeys[newKey])
     }
   }
 
-  const prevImage = () => {
-    if (data?.sprites) {
-      const spriteKeys = Object.keys(data.sprites)
-      const currentKey = spriteKeys.indexOf(actualImage)
-      const prevKey =
-        currentKey - 1 >= 0 ? currentKey - 1 : spriteKeys.length - 1
-      setActualImage(spriteKeys[prevKey])
-    }
-  }
+  const nextImage = () => changeImage(true)
+  const prevImage = () => changeImage(false)
 
   useEffect(() => {
     if (id) {
-      const url = API_FCC + id
+      const url = API_FCC_PREFIX + id
       try {
         fetchData(url).then((newData) => setData(newData))
       } catch (error) {

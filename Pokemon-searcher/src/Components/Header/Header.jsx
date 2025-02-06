@@ -3,12 +3,22 @@ import { MoonIcon } from '../Icons.jsx'
 import { SunIcon } from '../Icons.jsx'
 import { useAppContext } from '../../hooks/useAppContext.js'
 import { IL18N } from '../../utils/consts.js'
-import {  useState } from 'react'
+import { useState } from 'react'
+import FiltersModal from '../FiltersModal/FiltersModal.jsx'
 
 export function Header() {
   const { theme, toggleTheme, lang, changeLang, isModalOpen } = useAppContext()
   const il18n = IL18N[lang]
   const [inputFocused, setInputFocuesed] = useState(false)
+  const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
+
+  const openFiltersModal = () => {
+    setIsFiltersModalOpen(true)
+  }
+
+  const closeFiltersModal = () => {
+    setIsFiltersModalOpen(false)
+  }
 
   const handleLangChange = (event) => {
     changeLang(event.target.value)
@@ -16,17 +26,21 @@ export function Header() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    //TODO: implement search functionality
   }
 
   const handleClick = (event) => {
     event.preventDefault()
+    openFiltersModal()
   }
 
   return (
     <div
-      className={`header-container ${theme === 'dark' ? 'dark-mode' : ''} ${
-        inputFocused ? 'input-focused' : ''
-      } ${isModalOpen ? 'hidden' : ''} `}
+      className={`header-container 
+        ${theme === 'dark' ? 'dark-mode' : ''} ${
+        inputFocused ? 'input-focused' : ''} 
+        ${isModalOpen ? 'hidden' : ''} 
+        ${isFiltersModalOpen ? 'hidden' : ''} `}
     >
       <h1>Pokemon Searcher</h1>
 
@@ -43,7 +57,10 @@ export function Header() {
           value={il18n.search}
           className={theme === 'dark' ? 'dark-mode' : ''}
         />
-        <button onClick={handleClick} className={theme === 'dark' ? 'dark-mode' : ''}>
+        <button
+          onClick={handleClick}
+          className={theme === 'dark' ? 'dark-mode' : ''}
+        >
           {il18n.filters}
         </button>
       </form>
@@ -66,6 +83,7 @@ export function Header() {
           <option value="pt">Português</option>
         </select>
       </div>
+      <FiltersModal isOpen={isFiltersModalOpen} onClose={closeFiltersModal} />
     </div>
   )
 }

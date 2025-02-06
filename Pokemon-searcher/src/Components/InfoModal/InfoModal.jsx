@@ -10,7 +10,7 @@ Modal.setAppElement('#root')
 
 export default function InfoModal({ isOpen, onClose, id }) {
   const { data, actualImage, nextImage, prevImage } = useInfoModal({ id })
-  
+
   const { theme, lang } = useAppContext()
   const il18n = IL18N[lang]
 
@@ -18,7 +18,7 @@ export default function InfoModal({ isOpen, onClose, id }) {
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      className="modal-content"
+      className="info-modal-content"
       shouldCloseOnOverlayClick={true}
       ariaHideApp={false}
     >

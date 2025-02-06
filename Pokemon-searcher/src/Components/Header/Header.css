@@ -80,6 +80,7 @@
         border-radius: 4px;
         width: 80%;
         cursor: pointer;
+        color: var(--text-dark);
         
         & > option{
             cursor: pointer;
@@ -87,7 +88,6 @@
         
         &.dark-mode{
             background-color: var(--background-light);
-            color: var(--text-dark);
             font-weight: 600;
         }
     }

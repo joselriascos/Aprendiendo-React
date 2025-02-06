@@ -4,9 +4,9 @@ export const AppContext = createContext()
 
 export function AppContextProvider({ children }) {
   const [theme, setTheme] = useState(
-    window.localStorage.getItem('theme') || 'light'
+    window.localStorage.getItem('theme') || 'dark'
   )
-  const [lang, setLang] = useState(window.localStorage.getItem('lang') || 'es')
+  const [lang, setLang] = useState(window.localStorage.getItem('lang') || 'en')
   const[isModalOpen, setIsModalOpen] = useState(false)
 
   const toggleTheme = () => {

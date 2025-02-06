@@ -1,62 +1,34 @@
-import { useState } from 'react'
-import { useAppContext } from '../../hooks/useAppContext.js'
 import { ThreeDot } from 'react-loading-indicators'
-import data from '../../mocks/general_results.json'
 import InfoModal from '../InfoModal/InfoModal.jsx'
 import './Content.css'
-
-const results = data.results
+import { PokemonResult } from '../PokemonResult.jsx'
+import { useContent } from '../../hooks/useContent.js'
+import { useAppContext } from '../../hooks/useAppContext.js'
 
 export default function Content() {
-  const { theme, isModalOpen, changeIsModalOpen } = useAppContext()
-  const [selectedPokemon, setSelectedPokemon] = useState(null)
+  const { openModal, closeModal, results, selectedPokemon } = useContent()
+  const { theme, isModalOpen } = useAppContext()
 
-  const className = `result ${theme === 'dark' ? 'dark-mode' : ''}`
-
-  const openModal = (id) => {
-    if (!id) return
-    changeIsModalOpen(true)
-    setSelectedPokemon(id)
-  }
-
-  const closeModal = () => {
-    changeIsModalOpen(false)
-    setSelectedPokemon(null)
-  }
-
-  return (
+  return !results ? (
+    <div className="content-loading-container">
+      <ThreeDot
+        variant="bounce"
+        size="medium"
+        text=""
+        textColor=""
+        color={theme === 'dark' ? '#fff' : '#000'}
+      />
+    </div>
+  ) : results.length > 0 ? (
     <div className="results-container">
-      {results.map((result) => {
-        const { name, url } = result
-        const id = url.slice(
-          url.lastIndexOf('pokemon') + 8,
-          url.lastIndexOf('/')
-        )
-        const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-        const [isLoading, setIsLoading] = useState(true)
-
+      {results.map((result, index) => {
         return (
-          <div className={className} key={name} onClick={() => openModal(id)}>
-            {isLoading && (
-              <div className="loading-container">
-                <ThreeDot
-                  variant="bounce"
-                  size="medium"
-                  text=""
-                  textColor=""
-                  color={theme === 'dark' ? '#000' : '#fff'}
-                />
-              </div>
-            )}
-            <img
-              src={imgUrl}
-              alt={`${name} sprite`}
-              onLoad={() => setIsLoading(false)}
-              style={{ display: isLoading ? 'none' : 'block' }}
-            />
-            <h3>{name}</h3>
-            <h4>{`# ${id}`}</h4>
-          </div>
+          <PokemonResult
+            result={result}
+            key={index}
+            theme={theme}
+            onClick={openModal}
+          />
         )
       })}
 
@@ -68,5 +40,7 @@ export default function Content() {
         />
       )}
     </div>
+  ) : (
+    <div>No se encontraron resultados</div>
   )
 }
