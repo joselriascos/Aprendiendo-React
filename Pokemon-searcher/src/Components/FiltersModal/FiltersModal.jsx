@@ -118,8 +118,8 @@ export default function FiltersModal({ isOpen, onClose }) {
             </select>
 
             <div className="buttons-container">
-              <button onClick={resetSelection}>{il18n.reset_filters}</button>
               <button onClick={handleFilter}>{il18n.filter}</button>
+              <button onClick={resetSelection}>{il18n.reset_filters}</button>
             </div>
           </div>
         </div>

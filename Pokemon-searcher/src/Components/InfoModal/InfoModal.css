@@ -79,6 +79,7 @@
     border: none;
     outline: none;
     color: var(--black);
+    background-color: transparent;
     
     svg{
       color: var(--purple);

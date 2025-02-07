@@ -4,10 +4,13 @@ import './Content.css'
 import { PokemonResult } from '../PokemonResult.jsx'
 import { useContent } from '../../hooks/useContent.js'
 import { useAppContext } from '../../hooks/useAppContext.js'
+import { IL18N } from '../../utils/consts.js'
+import { useInfoModal } from '../../hooks/useInfoModal.js'
 
 export default function Content() {
   const { openModal, closeModal, results, selectedPokemon } = useContent()
-  const { theme, isModalOpen } = useAppContext()
+  const { theme, lang, isModalOpen } = useAppContext()
+  const il18n = IL18N[lang]
 
   return !results ? (
     <div className="content-loading-container">
@@ -41,6 +44,10 @@ export default function Content() {
       )}
     </div>
   ) : (
-    <div>No se encontraron resultados</div>
+    <div
+      className={`no-results-container ${theme === 'dark' ? 'dark-mode' : ''}`}
+    >
+      {il18n.no_results}
+    </div>
   )
 }

@@ -18,6 +18,7 @@ export const IL18N = {
     reset_filters: 'Reset filters',
     filter: 'Filter',
     all: 'All',
+    no_results: 'No results found',
   },
   es: {
     search: 'Buscar',
@@ -38,6 +39,7 @@ export const IL18N = {
     reset_filters: 'Reiniciar filtros',
     filter: 'Filtrar',
     all: 'Todos',
+    no_results: 'No se encontraron resultados',
   },
   fr: {
     search: 'Rechercher',
@@ -58,6 +60,7 @@ export const IL18N = {
     reset_filters: 'Réinitialiser les filtres',
     filter: 'Filtrer',
     all: 'Tous',
+    no_results: 'Aucun résultat trouvé',
   },
   pt: {
     search: 'Procurar',
@@ -78,12 +81,15 @@ export const IL18N = {
     reset_filters: 'Redefinir filtros',
     filter: 'Filtrar',
     all: 'Todos',
+    no_results: 'Nenhum resultado encontrado',
   },
 }
 
-export const API_FCC_PREFIX = 'https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/'
+export const API_FCC_PREFIX =
+  'https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/'
 
-export const API_ALL_POKEMON = 'https://pokeapi.co/api/v2/pokemon/?limit=10279&offset=0'
+export const API_ALL_POKEMON =
+  'https://pokeapi.co/api/v2/pokemon/?limit=10279&offset=0'
 
 export const API_POKEMON_FILTERED_BY_TYPE = 'https://pokeapi.co/api/v2/type/'
 
