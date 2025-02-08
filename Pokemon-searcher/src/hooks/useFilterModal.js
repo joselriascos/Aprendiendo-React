@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { FILTERS_INITIAL_STATE, IL18N } from '../utils/consts'
 import { useFilters } from './useFilters'
 import { useAppContext } from './useAppContext'
+import { useDisableScroll } from './useDisableScroll'
 
 export function useFiltersModal({ isOpen, onClose }) {
   const { filters, setFilters, resetFilters } = useFilters()
@@ -11,6 +12,8 @@ export function useFiltersModal({ isOpen, onClose }) {
   const [selectedType, setSelectedType] = useState(filters.type)
   const { lang } = useAppContext()
   const il18n = IL18N[lang]
+
+  useDisableScroll({ isOpen })
 
   useEffect(() => {
     setSelectedMin(filters.minId)
