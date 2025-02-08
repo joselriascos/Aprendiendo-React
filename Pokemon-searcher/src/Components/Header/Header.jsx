@@ -14,7 +14,7 @@ export function Header() {
   const [inputFocused, setInputFocuesed] = useState(false)
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
   const { resetSearch, setSearch } = useSearch()
-  const { checkFiltersActive } = useFilters()
+  const { checkFiltersActive, resetFilters } = useFilters()
   const searchRef = useRef()
 
   const openFiltersModal = () => {
@@ -43,9 +43,15 @@ export function Header() {
     }
   }
 
-  const handleClick = (event) => {
+  const handleFiltersOpen = (event) => {
     event.preventDefault()
     openFiltersModal()
+  }
+
+  const handleClickHome = () => {
+    resetSearch()
+    resetFilters()
+    searchRef.current.value = ""
   }
 
   return (
@@ -57,7 +63,7 @@ export function Header() {
         ${isModalOpen ? 'hidden' : ''} 
         ${isFiltersModalOpen ? 'hidden' : ''} `}
     >
-      <h1>Pokemon Searcher</h1>
+      <h1 onClick={handleClickHome}>Pokemon Searcher</h1>
 
       <form onSubmit={handleSubmit}>
         <input
@@ -74,7 +80,7 @@ export function Header() {
           className={theme === 'dark' ? 'dark-mode' : ''}
         />
         <button
-          onClick={handleClick}
+          onClick={handleFiltersOpen}
           className={`${theme === 'dark' ? 'dark-mode' : ''} ${
             checkFiltersActive() ? 'filters-active' : ''
           } `}

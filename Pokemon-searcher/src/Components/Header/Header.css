@@ -29,6 +29,7 @@
 
 .header-container > h1 {
     font-size: 1.8em;
+    cursor: pointer;
 }
 
 .header-container > form {
