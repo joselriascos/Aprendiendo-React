@@ -75,8 +75,8 @@ export function Header() {
           ref={searchRef}
         />
         <button
-          // type="submit"
-          className={`${theme === 'dark' ? 'dark-mode' : ''} ${
+        type='submit'
+          className={`search-btn ${theme === 'dark' ? 'dark-mode' : ''} ${
             search !== '' ? 'search-active' : ''
           }`}
         >
@@ -84,7 +84,7 @@ export function Header() {
         </button>
         <button
           onClick={handleFiltersOpen}
-          className={`${theme === 'dark' ? 'dark-mode' : ''} ${
+          className={`filters-btn ${theme === 'dark' ? 'dark-mode' : ''} ${
             checkFiltersActive() ? 'filters-active' : ''
           } `}
         >
