@@ -155,11 +155,30 @@
 }
 
 @media (max-width: 768px) {
+  .id-range-filter-container {
+    flex-direction: column;
+    width: 90%;
+    justify-content: center;
+    place-self: center;
+    gap: 10px;
+  }
+
   .id-range-filter-container .range-container {
+    width: 100%;
+
+    input{
+      width: 100%;
+    }
+
+    input::-webkit-slider-runnable-track{
+      height: 1.5em;
+    }
 
     input::-webkit-slider-thumb {
-      width: 15px;
+      width: 1.5em;
+      height: 1.5em;
       background-color: rgb(70, 63, 77);
+      box-shadow: -200px 0 0 200px var(--purple);
     }
   }
 }
