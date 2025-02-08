@@ -5,7 +5,6 @@ import { PokemonResult } from '../PokemonResult.jsx'
 import { useContent } from '../../hooks/useContent.js'
 import { useAppContext } from '../../hooks/useAppContext.js'
 import { IL18N } from '../../utils/consts.js'
-import { useInfoModal } from '../../hooks/useInfoModal.js'
 
 export default function Content() {
   const { openModal, closeModal, results, selectedPokemon } = useContent()

@@ -3,14 +3,17 @@ import { MoonIcon } from '../Icons.jsx'
 import { SunIcon } from '../Icons.jsx'
 import { useAppContext } from '../../hooks/useAppContext.js'
 import { IL18N } from '../../utils/consts.js'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import FiltersModal from '../FiltersModal/FiltersModal.jsx'
+import { useSearch } from '../../hooks/useSearch.js'
 
 export function Header() {
   const { theme, toggleTheme, lang, changeLang, isModalOpen } = useAppContext()
   const il18n = IL18N[lang]
   const [inputFocused, setInputFocuesed] = useState(false)
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
+  const searchRef = useRef()
+  const { setSearch } = useSearch()
 
   const openFiltersModal = () => {
     setIsFiltersModalOpen(true)
@@ -26,7 +29,13 @@ export function Header() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    //TODO: implement search functionality
+    const newSearch = searchRef.current.value
+    setSearch(newSearch.toLowerCase().trim())
+    searchRef.current.select()
+  }
+
+  const handleChange = (event) => {
+    searchRef.current.value = event.target.value
   }
 
   const handleClick = (event) => {
@@ -38,19 +47,21 @@ export function Header() {
     <div
       className={`header-container 
         ${theme === 'dark' ? 'dark-mode' : ''} ${
-        inputFocused ? 'input-focused' : ''} 
+        inputFocused ? 'input-focused' : ''
+      } 
         ${isModalOpen ? 'hidden' : ''} 
         ${isFiltersModalOpen ? 'hidden' : ''} `}
     >
       <h1>Pokemon Searcher</h1>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Pikachu, 154, Bulbasaur, 87..."
           onFocus={() => setInputFocuesed(true)}
           onBlur={() => setInputFocuesed(false)}
-          onSubmit={handleSubmit}
+          onChange={handleChange}
+          ref={searchRef}
         />
         <input
           type="submit"

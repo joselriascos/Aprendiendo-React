@@ -91,7 +91,9 @@ export const API_FCC_PREFIX =
 export const API_ALL_POKEMON =
   'https://pokeapi.co/api/v2/pokemon/?limit=10279&offset=0'
 
-export const API_POKEMON_FILTERED_BY_TYPE = 'https://pokeapi.co/api/v2/type/'
+export const API_POKEMON_FILTERED_BY_TYPE_PREFIX = 'https://pokeapi.co/api/v2/type/'
+
+export const API_POKEMON_FILTERED_BY_ID_PREFIX = 'https://pokeapi.co/api/v2/pokemon/'
 
 export const FILTERS_INITIAL_STATE = {
   minId: 1,

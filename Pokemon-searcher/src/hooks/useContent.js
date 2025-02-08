@@ -4,7 +4,7 @@ import { useFilters } from './useFilters'
 import { fetchData } from '../utils/functions'
 import {
   API_ALL_POKEMON,
-  API_POKEMON_FILTERED_BY_TYPE,
+  API_POKEMON_FILTERED_BY_TYPE_PREFIX,
   FILTERS_INITIAL_STATE,
 } from '../utils/consts'
 
@@ -20,7 +20,7 @@ export function useContent() {
       const url =
         filters.type === FILTERS_INITIAL_STATE.type
           ? API_ALL_POKEMON
-          : API_POKEMON_FILTERED_BY_TYPE + filters.type
+          : API_POKEMON_FILTERED_BY_TYPE_PREFIX + filters.type
       try {
         const newResults = await fetchData(url)
         const filteredResults =
