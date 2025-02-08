@@ -5,7 +5,7 @@ export function PokemonResult({ result, theme, onClick }) {
   const [isLoading, setIsLoading] = useState(true)
   const { pokemon } = result
   const { name, url } = pokemon ? pokemon : result
-  const id = url.slice(url.lastIndexOf('pokemon') + 8, url.lastIndexOf('/'))
+  const id = result.id || url?.slice(url.lastIndexOf('pokemon') + 8, url.lastIndexOf('/'))
   const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
 
   return (

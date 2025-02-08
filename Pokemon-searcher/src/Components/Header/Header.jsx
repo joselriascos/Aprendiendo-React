@@ -12,8 +12,8 @@ export function Header() {
   const il18n = IL18N[lang]
   const [inputFocused, setInputFocuesed] = useState(false)
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
+  const { resetSearch, setSearch } = useSearch()
   const searchRef = useRef()
-  const { setSearch } = useSearch()
 
   const openFiltersModal = () => {
     setIsFiltersModalOpen(true)
@@ -36,6 +36,9 @@ export function Header() {
 
   const handleChange = (event) => {
     searchRef.current.value = event.target.value
+    if (!event.target.value) {
+      resetSearch()
+    }
   }
 
   const handleClick = (event) => {

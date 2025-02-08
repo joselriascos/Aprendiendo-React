@@ -6,34 +6,47 @@ import {
   API_ALL_POKEMON,
   API_POKEMON_FILTERED_BY_TYPE_PREFIX,
   FILTERS_INITIAL_STATE,
+  API_POKEMON_SEARCH_POKEMON,
 } from '../utils/consts'
+import { useSearch } from './useSearch'
 
 export function useContent() {
   const [selectedPokemon, setSelectedPokemon] = useState(null)
   const [results, setResults] = useState(null)
   const { filters, filterResults } = useFilters()
   const { changeIsModalOpen } = useAppContext()
+  const { search } = useSearch()
 
   useEffect(() => {
     const fetchDataAndFilter = async () => {
       setResults(null)
-      const url =
-        filters.type === FILTERS_INITIAL_STATE.type
-          ? API_ALL_POKEMON
-          : API_POKEMON_FILTERED_BY_TYPE_PREFIX + filters.type
-      try {
-        const newResults = await fetchData(url)
-        const filteredResults =
+      if (search.length) {
+        const url = `${API_POKEMON_SEARCH_POKEMON}${search}/`
+        try {
+          const newResults = await fetchData(url)
+          setResults(newResults.id ? [newResults] : [])
+        } catch (error) {
+          console.log(error)
+        }
+      } else {
+        const url =
           filters.type === FILTERS_INITIAL_STATE.type
-            ? filterResults(newResults.results)
-            : filterResults(newResults.pokemon)
-        setResults(filteredResults.slice(0, 20))
-      } catch (error) {
-        console.error(error)
+            ? API_ALL_POKEMON
+            : API_POKEMON_FILTERED_BY_TYPE_PREFIX + filters.type
+        try {
+          const newResults = await fetchData(url)
+          const filteredResults =
+            filters.type === FILTERS_INITIAL_STATE.type
+              ? filterResults(newResults.results)
+              : filterResults(newResults.pokemon)
+          setResults(filteredResults.slice(0, 20))
+        } catch (error) {
+          console.error(error)
+        }
       }
     }
     fetchDataAndFilter()
-  }, [filters])
+  }, [filters, search])
 
   const openModal = (id) => {
     if (!id) return

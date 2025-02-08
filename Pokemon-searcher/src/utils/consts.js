@@ -93,7 +93,7 @@ export const API_ALL_POKEMON =
 
 export const API_POKEMON_FILTERED_BY_TYPE_PREFIX = 'https://pokeapi.co/api/v2/type/'
 
-export const API_POKEMON_FILTERED_BY_ID_PREFIX = 'https://pokeapi.co/api/v2/pokemon/'
+export const API_POKEMON_SEARCH_POKEMON = 'https://pokeapi.co/api/v2/pokemon/'
 
 export const FILTERS_INITIAL_STATE = {
   minId: 1,

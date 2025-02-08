@@ -9,9 +9,10 @@
     API: https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0 -> Obtener todos los pokemones
     API: https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/ -> Otra opción para obtenerlos todos
     API: https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/${nameOrId} -> Obtener datos específicos de cada uno
+- [👌] Búsqueda
+- TODO: Refactorizar si es posible
 - ADICIONAL: Mostrar cuando haya algún filtro activo
 - ADICIONAL: Mostrar el número de pokemones encontrados
-- Búsqueda
 - Sistema de autocompletado en el buscador o de búsqueda por nombre
 - Sistema de búsqueda automática con debouncer
 - Scroll infinito o paginación
