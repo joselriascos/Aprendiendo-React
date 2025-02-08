@@ -13,6 +13,7 @@ import { useSearch } from './useSearch'
 export function useContent() {
   const [selectedPokemon, setSelectedPokemon] = useState(null)
   const [results, setResults] = useState(null)
+  const [resultsNumber, setResultsNumber] = useState(0)
   const { filters, filterResults } = useFilters()
   const { changeIsModalOpen } = useAppContext()
   const { search, checkSearchInFilters } = useSearch()
@@ -40,6 +41,7 @@ export function useContent() {
             filters.type === FILTERS_INITIAL_STATE.type
               ? filterResults(newResults.results)
               : filterResults(newResults.pokemon)
+          setResultsNumber(filteredResults.length || 0)
           setResults(filteredResults.slice(0, 20))
         } catch (error) {
           console.error(error)
@@ -60,5 +62,5 @@ export function useContent() {
     setSelectedPokemon(null)
   }
 
-  return { openModal, closeModal, results, selectedPokemon }
+  return { openModal, closeModal, results, selectedPokemon, resultsNumber }
 }

@@ -46,7 +46,7 @@
         padding: 0 10px;
     }
     
-    & > input[type="submit"], & > button{
+    & > button{
         width: 7em;
         height: 2em;
         background-color: var(--background-dark);
@@ -62,7 +62,7 @@
         }
     }
 
-    & > button.filters-active::after{
+    & > button.filters-active::after, & > button.search-active::after{
         content: "";
         position: absolute;
         bottom: 85%;

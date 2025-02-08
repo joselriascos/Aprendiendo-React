@@ -10,9 +10,8 @@
     API: https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/ -> Otra opción para obtenerlos todos
     API: https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/${nameOrId} -> Obtener datos específicos de cada uno
 - [👌] Búsqueda
-- TODO: Refactorizar si es posible
-- ADICIONAL: Mostrar cuando haya algún filtro activo
-- ADICIONAL: Mostrar el número de pokemones encontrados
 - Sistema de autocompletado en el buscador o de búsqueda por nombre
 - Sistema de búsqueda automática con debouncer
 - Scroll infinito o paginación
+
+- TODO: Refactorizar si es posible

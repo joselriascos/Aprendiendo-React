@@ -5,10 +5,15 @@ import { PokemonResult } from '../PokemonResult.jsx'
 import { useContent } from '../../hooks/useContent.js'
 import { useAppContext } from '../../hooks/useAppContext.js'
 import { IL18N } from '../../utils/consts.js'
+import { useFilters } from '../../hooks/useFilters.js'
+import { useSearch } from '../../hooks/useSearch.js'
 
 export default function Content() {
-  const { openModal, closeModal, results, selectedPokemon } = useContent()
+  const { openModal, closeModal, results, selectedPokemon, resultsNumber } =
+    useContent()
   const { theme, lang, isModalOpen } = useAppContext()
+  const { checkFiltersActive } = useFilters()
+  const { search } = useSearch()
   const il18n = IL18N[lang]
 
   return !results ? (
@@ -23,24 +28,34 @@ export default function Content() {
     </div>
   ) : results.length > 0 ? (
     <div className="results-container">
-      {results.map((result, index) => {
-        return (
-          <PokemonResult
-            result={result}
-            key={index}
-            theme={theme}
-            onClick={openModal}
-          />
-        )
-      })}
+      <h2
+        className={`${theme === 'dark' ? 'dark-mode' : ''} ${
+          checkFiltersActive() && search === '' ? '' : 'hidden'
+        }`}
+      >
+        {`Se encontraron ${resultsNumber} resultados`}
+      </h2>
 
-      {selectedPokemon && (
-        <InfoModal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          id={selectedPokemon}
-        />
-      )}
+      <div className="results-grid">
+        {results.map((result, index) => {
+          return (
+            <PokemonResult
+              result={result}
+              key={index}
+              theme={theme}
+              onClick={openModal}
+            />
+          )
+        })}
+
+        {selectedPokemon && (
+          <InfoModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            id={selectedPokemon}
+          />
+        )}
+      </div>
     </div>
   ) : (
     <div

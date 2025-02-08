@@ -13,7 +13,7 @@ export function Header() {
   const il18n = IL18N[lang]
   const [inputFocused, setInputFocuesed] = useState(false)
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
-  const { resetSearch, setSearch } = useSearch()
+  const { resetSearch, setSearch, search } = useSearch()
   const { checkFiltersActive, resetFilters } = useFilters()
   const searchRef = useRef()
 
@@ -51,7 +51,7 @@ export function Header() {
   const handleClickHome = () => {
     resetSearch()
     resetFilters()
-    searchRef.current.value = ""
+    searchRef.current.value = ''
   }
 
   return (
@@ -74,11 +74,14 @@ export function Header() {
           onChange={handleChange}
           ref={searchRef}
         />
-        <input
-          type="submit"
-          value={il18n.search}
-          className={theme === 'dark' ? 'dark-mode' : ''}
-        />
+        <button
+          // type="submit"
+          className={`${theme === 'dark' ? 'dark-mode' : ''} ${
+            search !== '' ? 'search-active' : ''
+          }`}
+        >
+          {il18n.search}
+        </button>
         <button
           onClick={handleFiltersOpen}
           className={`${theme === 'dark' ? 'dark-mode' : ''} ${
