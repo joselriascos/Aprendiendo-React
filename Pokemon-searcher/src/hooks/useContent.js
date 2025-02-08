@@ -15,7 +15,7 @@ export function useContent() {
   const [results, setResults] = useState(null)
   const { filters, filterResults } = useFilters()
   const { changeIsModalOpen } = useAppContext()
-  const { search } = useSearch()
+  const { search, checkSearchInFilters } = useSearch()
 
   useEffect(() => {
     const fetchDataAndFilter = async () => {
@@ -23,10 +23,11 @@ export function useContent() {
       if (search.length) {
         const url = `${API_POKEMON_SEARCH_POKEMON}${search}/`
         try {
-          const newResults = await fetchData(url)
-          setResults(newResults.id ? [newResults] : [])
+          const newResult = await fetchData(url)
+          const checkedResult = checkSearchInFilters(newResult)
+          setResults(checkedResult)
         } catch (error) {
-          console.log(error)
+          console.error(error)
         }
       } else {
         const url =

@@ -6,6 +6,7 @@ import { IL18N } from '../../utils/consts.js'
 import { useRef, useState } from 'react'
 import FiltersModal from '../FiltersModal/FiltersModal.jsx'
 import { useSearch } from '../../hooks/useSearch.js'
+import { useFilters } from '../../hooks/useFilters.js'
 
 export function Header() {
   const { theme, toggleTheme, lang, changeLang, isModalOpen } = useAppContext()
@@ -13,6 +14,7 @@ export function Header() {
   const [inputFocused, setInputFocuesed] = useState(false)
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
   const { resetSearch, setSearch } = useSearch()
+  const { checkFiltersActive } = useFilters()
   const searchRef = useRef()
 
   const openFiltersModal = () => {
@@ -73,7 +75,9 @@ export function Header() {
         />
         <button
           onClick={handleClick}
-          className={theme === 'dark' ? 'dark-mode' : ''}
+          className={`${theme === 'dark' ? 'dark-mode' : ''} ${
+            checkFiltersActive() ? 'filters-active' : ''
+          } `}
         >
           {il18n.filters}
         </button>

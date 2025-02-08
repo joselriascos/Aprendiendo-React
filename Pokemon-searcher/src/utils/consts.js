@@ -19,6 +19,9 @@ export const IL18N = {
     filter: 'Filter',
     all: 'All',
     no_results: 'No results found',
+    error1: 'The minimum value must be less than the maximum',
+    error2: 'The minimum value must be greater than',
+    error3: 'The maximum value is',
   },
   es: {
     search: 'Buscar',
@@ -40,6 +43,9 @@ export const IL18N = {
     filter: 'Filtrar',
     all: 'Todos',
     no_results: 'No se encontraron resultados',
+    error1: 'El valor mínimo debe ser menor que el máximo',
+    error2: 'El valor mínimo debe ser mayor a',
+    error3: 'El valor máximo es',
   },
   fr: {
     search: 'Rechercher',
@@ -61,6 +67,9 @@ export const IL18N = {
     filter: 'Filtrer',
     all: 'Tous',
     no_results: 'Aucun résultat trouvé',
+    error1: 'La valeur minimale doit être inférieure à la valeur maximale',
+    error2: 'La valeur minimale doit être supérieure à',
+    error3: 'La valeur maximale est',
   },
   pt: {
     search: 'Procurar',
@@ -82,6 +91,9 @@ export const IL18N = {
     filter: 'Filtrar',
     all: 'Todos',
     no_results: 'Nenhum resultado encontrado',
+    error1: 'O valor mínimo deve ser menor que o valor máximo',
+    error2: 'O valor mínimo deve ser maior que',
+    error3: 'O valor máximo é',
   },
 }
 
@@ -91,7 +103,8 @@ export const API_FCC_PREFIX =
 export const API_ALL_POKEMON =
   'https://pokeapi.co/api/v2/pokemon/?limit=10279&offset=0'
 
-export const API_POKEMON_FILTERED_BY_TYPE_PREFIX = 'https://pokeapi.co/api/v2/type/'
+export const API_POKEMON_FILTERED_BY_TYPE_PREFIX =
+  'https://pokeapi.co/api/v2/type/'
 
 export const API_POKEMON_SEARCH_POKEMON = 'https://pokeapi.co/api/v2/pokemon/'
 

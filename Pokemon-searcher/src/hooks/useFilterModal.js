@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { FILTERS_INITIAL_STATE } from '../utils/consts'
+import { FILTERS_INITIAL_STATE, IL18N } from '../utils/consts'
 import { useFilters } from './useFilters'
+import { useAppContext } from './useAppContext'
 
 export function useFiltersModal({ isOpen, onClose }) {
   const { filters, setFilters, resetFilters } = useFilters()
@@ -8,6 +9,8 @@ export function useFiltersModal({ isOpen, onClose }) {
   const [selectedMin, setSelectedMin] = useState(filters.minId)
   const [selectedMax, setSelectedMax] = useState(filters.maxId)
   const [selectedType, setSelectedType] = useState(filters.type)
+  const { lang } = useAppContext()
+  const il18n = IL18N[lang]
 
   useEffect(() => {
     setSelectedMin(filters.minId)
@@ -16,18 +19,25 @@ export function useFiltersModal({ isOpen, onClose }) {
   }, [isOpen])
 
   useEffect(() => {
-    if (selectedMin > selectedMax) {
-      setErrors([...errors, 'El valor mínimo debe ser menor que el máximo'])
-    }
-    if (selectedMin <= FILTERS_INITIAL_STATE.minId - 1) {
-      setErrors([
-        ...errors,
-        `El valor mínimo debe ser mayor a ${FILTERS_INITIAL_STATE.minId - 1}`,
-      ])
-    }
-    if (selectedMax > FILTERS_INITIAL_STATE.maxId) {
-      setErrors([...errors, `La id máxima es ${FILTERS_INITIAL_STATE.maxId}`])
-    }
+    setErrors((prevErrors) => {
+      let newErrors = [...prevErrors]
+
+      if (selectedMin > selectedMax && !newErrors.includes(il18n.error1)) {
+        newErrors.push(il18n.error1)
+      }
+
+      if (selectedMin <= FILTERS_INITIAL_STATE.minId - 1) {
+        const errorMsg = `${il18n.error2} ${FILTERS_INITIAL_STATE.minId - 1}`
+        if (!newErrors.includes(errorMsg)) newErrors.push(errorMsg)
+      }
+
+      if (selectedMax > FILTERS_INITIAL_STATE.maxId) {
+        const errorMsg = `${il18n.error3} ${FILTERS_INITIAL_STATE.maxId}`
+        if (!newErrors.includes(errorMsg)) newErrors.push(errorMsg)
+      }
+
+      return newErrors
+    })
 
     return () => setErrors([])
   }, [selectedMin, selectedMax])
@@ -50,6 +60,7 @@ export function useFiltersModal({ isOpen, onClose }) {
       maxId: selectedMax,
       type: selectedType,
     })
+
     setErrors([])
     onClose()
   }

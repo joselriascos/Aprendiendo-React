@@ -14,8 +14,18 @@ export function FiltersProvider({ children }) {
     setFilters(FILTERS_INITIAL_STATE)
   }
 
+  const checkFiltersActive = () => {
+    return !(
+      filters.minId === FILTERS_INITIAL_STATE.minId &&
+      filters.maxId === FILTERS_INITIAL_STATE.maxId &&
+      filters.type === FILTERS_INITIAL_STATE.type
+    )
+  }
+
   return (
-    <FiltersContext.Provider value={{ filters, setFilters, resetFilters }}>
+    <FiltersContext.Provider
+      value={{ filters, setFilters, resetFilters, checkFiltersActive }}
+    >
       {children}
     </FiltersContext.Provider>
   )
