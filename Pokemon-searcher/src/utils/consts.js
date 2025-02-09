@@ -22,6 +22,7 @@ export const IL18N = {
     error1: 'The minimum value must be less than the maximum',
     error2: 'The minimum value must be greater than',
     error3: 'The maximum value is',
+    results_found: 'Results found:',
   },
   es: {
     search: 'Buscar',
@@ -46,6 +47,7 @@ export const IL18N = {
     error1: 'El valor mínimo debe ser menor que el máximo',
     error2: 'El valor mínimo debe ser mayor a',
     error3: 'El valor máximo es',
+    results_found: 'Resultados encontrados:',
   },
   fr: {
     search: 'Rechercher',
@@ -70,6 +72,7 @@ export const IL18N = {
     error1: 'La valeur minimale doit être inférieure à la valeur maximale',
     error2: 'La valeur minimale doit être supérieure à',
     error3: 'La valeur maximale est',
+    results_found: 'Résultats trouvés:',
   },
   pt: {
     search: 'Procurar',
@@ -94,6 +97,7 @@ export const IL18N = {
     error1: 'O valor mínimo deve ser menor que o valor máximo',
     error2: 'O valor mínimo deve ser maior que',
     error3: 'O valor máximo é',
+    results_found: 'Resultados encontrados:',
   },
 }
 

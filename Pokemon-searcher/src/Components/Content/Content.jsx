@@ -33,7 +33,7 @@ export default function Content() {
           checkFiltersActive() && search === '' ? '' : 'hidden'
         }`}
       >
-        {`Se encontraron ${resultsNumber} resultados`}
+        {`${il18n.results_found} ${resultsNumber}`}
       </h2>
 
       <div className="results-grid">
