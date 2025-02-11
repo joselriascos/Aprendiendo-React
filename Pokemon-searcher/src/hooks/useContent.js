@@ -42,7 +42,7 @@ export function useContent() {
               ? filterResults(newResults.results)
               : filterResults(newResults.pokemon)
           setResultsNumber(filteredResults.length || 0)
-          setResults(filteredResults.slice(0, 20))
+          setResults(filteredResults)
         } catch (error) {
           console.error(error)
         }

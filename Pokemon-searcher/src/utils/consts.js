@@ -117,3 +117,5 @@ export const FILTERS_INITIAL_STATE = {
   maxId: 10279,
   type: 'all',
 }
+
+export const RESULTS_PER_PAGE = 20

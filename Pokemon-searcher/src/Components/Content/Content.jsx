@@ -7,16 +7,18 @@ import { useAppContext } from '../../hooks/useAppContext.js'
 import { IL18N } from '../../utils/consts.js'
 import { useFilters } from '../../hooks/useFilters.js'
 import { useSearch } from '../../hooks/useSearch.js'
+import { usePaginator } from '../../hooks/usePaginator.js'
 
 export default function Content() {
-  const { openModal, closeModal, results, selectedPokemon, resultsNumber } =
-    useContent()
+  const { openModal, closeModal, selectedPokemon, resultsNumber } = useContent()
+  //TODO: se está actualizando en el hook pero no aquí -> solucionar
+  const { paginatedResults } = usePaginator()
   const { theme, lang, isModalOpen } = useAppContext()
   const { checkFiltersActive } = useFilters()
   const { search } = useSearch()
   const il18n = IL18N[lang]
 
-  return !results ? (
+  return !paginatedResults ? (
     <div className="content-loading-container">
       <ThreeDot
         variant="bounce"
@@ -26,7 +28,7 @@ export default function Content() {
         color={theme === 'dark' ? '#fff' : '#000'}
       />
     </div>
-  ) : results.length > 0 ? (
+  ) : paginatedResults.length > 0 ? (
     <div className="results-container">
       <h2
         className={`${theme === 'dark' ? 'dark-mode' : ''} ${
@@ -37,7 +39,7 @@ export default function Content() {
       </h2>
 
       <div className="results-grid">
-        {results.map((result, index) => {
+        {paginatedResults.map((result, index) => {
           return (
             <PokemonResult
               result={result}
