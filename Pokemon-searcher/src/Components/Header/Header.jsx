@@ -14,7 +14,7 @@ export function Header() {
   const [inputFocused, setInputFocuesed] = useState(false)
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
   const [suggestions, setSuggestions] = useState([])
-  const [selectedIndex, setSelectedIndex] = useState(-1)
+  const [selectedIndex, setSelectedIndex] = useState(0)
   const { theme, toggleTheme, lang, changeLang, isModalOpen } = useAppContext()
   const il18n = IL18N[lang]
   const { resetSearch, setSearch, search } = useSearch()
@@ -62,7 +62,7 @@ export function Header() {
       }
     }
     if (event.key === 'Enter') {
-      if (selectedIndex > -1) {
+      if (suggestions.length > 0 && selectedIndex >= 0) {
         handleSuggestionSelect(suggestions[selectedIndex])
       }
     }
@@ -70,8 +70,12 @@ export function Header() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const newSearch = searchRef.current.value
-    setSearch(newSearch.toLowerCase().trim())
+    const newSearch = searchRef.current.value.trim()
+    if (!parseInt(newSearch)) {
+      setSearch(newSearch.toLowerCase())
+    } else {
+      setSearch(newSearch)
+    }
     searchRef.current.select()
     setSuggestions([])
     setSelectedIndex(0)
