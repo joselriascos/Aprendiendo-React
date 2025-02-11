@@ -7,7 +7,7 @@ export function AppContextProvider({ children }) {
     window.localStorage.getItem('theme') || 'dark'
   )
   const [lang, setLang] = useState(window.localStorage.getItem('lang') || 'en')
-  const[isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light')
@@ -39,7 +39,7 @@ export function AppContextProvider({ children }) {
         theme,
         toggleTheme,
         isModalOpen,
-        changeIsModalOpen
+        changeIsModalOpen,
       }}
     >
       {children}

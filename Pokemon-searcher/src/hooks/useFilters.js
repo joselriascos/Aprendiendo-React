@@ -16,5 +16,11 @@ export function useFilters() {
     })
   }
 
-  return { filters, setFilters, resetFilters, filterResults, checkFiltersActive }
+  return {
+    filters,
+    setFilters,
+    resetFilters,
+    filterResults,
+    checkFiltersActive,
+  }
 }

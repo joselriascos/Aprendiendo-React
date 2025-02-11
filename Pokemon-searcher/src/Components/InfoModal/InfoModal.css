@@ -69,7 +69,8 @@
     margin: 0;
   }
 
-  .next-img-container, .prev-img-container{
+  .next-img-container,
+  .prev-img-container {
     width: 40px;
     height: 40px;
     position: absolute;
@@ -80,18 +81,18 @@
     outline: none;
     color: var(--black);
     background-color: transparent;
-    
-    svg{
+
+    svg {
       color: var(--purple);
       background-color: transparent;
     }
   }
 
-  .next-img-container{
+  .next-img-container {
     right: 10px;
   }
 
-  .prev-img-container{
+  .prev-img-container {
     left: 10px;
   }
 

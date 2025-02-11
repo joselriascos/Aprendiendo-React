@@ -9,7 +9,10 @@ import './InfoModal.css'
 Modal.setAppElement('#root')
 
 export default function InfoModal({ isOpen, onClose, id }) {
-  const { data, actualImage, nextImage, prevImage } = useInfoModal({ id, isOpen })
+  const { data, actualImage, nextImage, prevImage } = useInfoModal({
+    id,
+    isOpen,
+  })
 
   const { theme, lang } = useAppContext()
   const il18n = IL18N[lang]

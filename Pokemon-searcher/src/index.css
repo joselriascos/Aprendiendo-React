@@ -1,11 +1,11 @@
-:root{
+:root {
   --background-dark: #262626;
   --background-light: #dfdfdf;
   --text-dark: #333;
   --text-light: #fff;
 }
 
-body{
+body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 0;
   padding: 0;

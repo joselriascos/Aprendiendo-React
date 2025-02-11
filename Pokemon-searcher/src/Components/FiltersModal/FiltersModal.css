@@ -166,11 +166,11 @@
   .id-range-filter-container .range-container {
     width: 100%;
 
-    input{
+    input {
       width: 100%;
     }
 
-    input::-webkit-slider-runnable-track{
+    input::-webkit-slider-runnable-track {
       height: 1.5em;
     }
 

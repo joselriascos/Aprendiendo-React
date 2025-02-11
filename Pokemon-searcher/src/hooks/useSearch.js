@@ -10,9 +10,10 @@ export function useSearch() {
   const checkSearchInFilters = (result) => {
     if (!result.id) return []
     if (!checkFiltersActive()) return [result]
-    const typeInFilters = filters.type === FILTERS_INITIAL_STATE.type ? true : result.types.find(
-      (type) => type.type.name === filters.type
-    )
+    const typeInFilters =
+      filters.type === FILTERS_INITIAL_STATE.type
+        ? true
+        : result.types.find((type) => type.type.name === filters.type)
     if (
       result.id >= filters.minId &&
       result.id <= filters.maxId &&
