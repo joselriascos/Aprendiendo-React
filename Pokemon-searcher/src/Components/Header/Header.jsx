@@ -3,130 +3,37 @@ import { MoonIcon } from '../Icons.jsx'
 import { SunIcon } from '../Icons.jsx'
 import { useAppContext } from '../../hooks/useAppContext.js'
 import { IL18N } from '../../utils/consts.js'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import FiltersModal from '../FiltersModal/FiltersModal.jsx'
+import { useHeader } from '../../hooks/useHeader.js'
 import { useSearch } from '../../hooks/useSearch.js'
 import { useFilters } from '../../hooks/useFilters.js'
-import { names } from '../../utils/names.js'
-import { checkVisibilityAndScroll } from '../../utils/functions.js'
 
 export function Header() {
-  const [inputFocused, setInputFocuesed] = useState(false)
-  const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
-  const [suggestions, setSuggestions] = useState([])
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const { theme, toggleTheme, lang, changeLang, isModalOpen } = useAppContext()
-  const il18n = IL18N[lang]
-  const { resetSearch, setSearch, search } = useSearch()
-  const { checkFiltersActive, resetFilters } = useFilters()
+  const { theme, toggleTheme, lang, isModalOpen } = useAppContext()
+  const { search } = useSearch()
+  const { checkFiltersActive } = useFilters()
   const searchRef = useRef()
   const suggestionContainerRef = useRef()
   const suggestionRef = useRef([])
-
-  const openFiltersModal = () => {
-    setIsFiltersModalOpen(true)
-  }
-
-  const closeFiltersModal = () => {
-    setIsFiltersModalOpen(false)
-  }
-
-  const handleLangChange = (event) => {
-    changeLang(event.target.value)
-  }
-
-  const handleKeyDown = (event) => {
-    if (event.key === 'Escape') {
-      searchRef.current.value = ''
-      searchRef.current.blur()
-      return
-    }
-    if (event.key === 'ArrowDown') {
-      event.preventDefault()
-      if (selectedIndex < suggestions.length - 1) {
-        setSelectedIndex(selectedIndex + 1)
-        checkVisibilityAndScroll({
-          container: suggestionContainerRef.current,
-          element: suggestionRef.current[selectedIndex + 1],
-        })
-      }
-    }
-    if (event.key === 'ArrowUp') {
-      event.preventDefault()
-      if (selectedIndex > 0) {
-        setSelectedIndex(selectedIndex - 1)
-        checkVisibilityAndScroll({
-          container: suggestionContainerRef.current,
-          element: suggestionRef.current[selectedIndex - 1],
-        })
-      }
-    }
-    if (event.key === 'Enter') {
-      if (suggestions.length > 0 && selectedIndex >= 0) {
-        handleSuggestionSelect(suggestions[selectedIndex])
-      }
-    }
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    const newSearch = searchRef.current.value.trim()
-    if (!parseInt(newSearch)) {
-      setSearch(newSearch.toLowerCase())
-    } else {
-      setSearch(newSearch)
-    }
-    searchRef.current.select()
-    setSuggestions([])
-    setSelectedIndex(0)
-  }
-
-  const handleChange = (event) => {
-    const newSearch = event.target.value
-    searchRef.current.value = newSearch
-    if (!newSearch) {
-      resetSearch()
-      setSuggestions([])
-      return
-    }
-    const newSuggesitions = names.filter((name) =>
-      name.toLowerCase().includes(newSearch.toLowerCase())
-    )
-    setSuggestions(newSuggesitions)
-    setSelectedIndex(0)
-  }
-
-  const handleFiltersOpen = (event) => {
-    event.preventDefault()
-    openFiltersModal()
-  }
-
-  const handleClickHome = () => {
-    resetSearch()
-    resetFilters()
-    setSuggestions([])
-    searchRef.current.value = ''
-    setSelectedIndex(0)
-  }
-
-  const handleSuggestionSelect = (text) => {
-    const newSearch = text.toLowerCase().trim()
-    setSearch(newSearch)
-    searchRef.current.value = newSearch
-    searchRef.current.select()
-    setSuggestions([])
-    setSelectedIndex(0)
-  }
-
-  const handleInputFocus = (event) => {
-    setInputFocuesed(true)
-    handleChange(event)
-  }
-
-  const handleInputBlur = () => {
-    setInputFocuesed(false)
-    setSuggestions([])
-  }
+  const {
+    inputFocused,
+    isFiltersModalOpen,
+    suggestions,
+    selectedIndex,
+    setSelectedIndex,
+    closeFiltersModal,
+    handleLangChange,
+    handleKeyDown,
+    handleSubmit,
+    handleChange,
+    handleFiltersOpen,
+    handleClickHome,
+    handleSuggestionSelect,
+    handleInputFocus,
+    handleInputBlur,
+  } = useHeader({ searchRef, suggestionRef, suggestionContainerRef })
+  const il18n = IL18N[lang]
 
   return (
     <div
