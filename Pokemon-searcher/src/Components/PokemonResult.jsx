@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { ThreeDot } from 'react-loading-indicators'
+import { FALLBACK_IMG, POKEMON_IMG_PREFIX } from '../utils/consts'
 
 export function PokemonResult({ result, theme, onClick }) {
   const [isLoading, setIsLoading] = useState(true)
+  const [imgError, setImgError] = useState(false)
   const { pokemon } = result
   const { name, url } = pokemon ? pokemon : result
   const id =
     result.id ||
     url?.slice(url.lastIndexOf('pokemon') + 8, url.lastIndexOf('/'))
-  const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+  const imgUrl = imgError ? FALLBACK_IMG : `${POKEMON_IMG_PREFIX}${id}.png`
 
   return (
     <div
@@ -30,6 +32,7 @@ export function PokemonResult({ result, theme, onClick }) {
         src={imgUrl}
         alt={`${name} sprite`}
         onLoad={() => setIsLoading(false)}
+        onError={() => setImgError(true)}
         style={{ display: isLoading ? 'none' : 'block' }}
       />
       <h3>{name}</h3>

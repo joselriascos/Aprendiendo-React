@@ -1,6 +1,9 @@
 export async function fetchData(url) {
   try {
     const response = await fetch(url)
+    if (!response.ok) {
+      return {}
+    }
     const data = await response.json()
     return data
   } catch {
@@ -26,4 +29,8 @@ export function checkVisibilityAndScroll({ element, container }) {
     container.scrollTop -= elementRect.height
     return
   }
+}
+
+export function resetScroll() {
+  document.querySelector('html').scrollTo({ top: 0, behavior: 'smooth' })
 }

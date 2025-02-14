@@ -44,6 +44,10 @@ export function usePaginator() {
     if (page > pages.length && pages.length > 0) setPage(1)
   }, [pages.length])
 
+  useEffect(() => {
+    setPage(1)
+  }, [results])
+
   return {
     page,
     visibleButtons,

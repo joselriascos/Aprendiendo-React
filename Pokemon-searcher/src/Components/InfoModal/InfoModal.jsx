@@ -1,10 +1,10 @@
+import './InfoModal.css'
 import Modal from 'react-modal'
 import { ThreeDot } from 'react-loading-indicators'
 import { useAppContext } from '../../hooks/useAppContext.js'
 import { NextImage, PrevImage } from '../Icons.jsx'
 import { useInfoModal } from '../../hooks/useInfoModal.js'
-import { IL18N } from '../../utils/consts.js'
-import './InfoModal.css'
+import { FALLBACK_IMG, IL18N } from '../../utils/consts.js'
 
 Modal.setAppElement('#root')
 
@@ -62,8 +62,12 @@ export default function InfoModal({ isOpen, onClose, id }) {
 
             <div id="sprite-container">
               <img
-                src={data.sprites[actualImage]}
-                alt={`${data.name} sprite`}
+                src={
+                  data?.sprites[actualImage]
+                    ? data?.sprites[actualImage]
+                    : FALLBACK_IMG
+                }
+                alt={`${data?.name} sprite`}
                 id="sprite"
               />
             </div>
@@ -88,27 +92,51 @@ export default function InfoModal({ isOpen, onClose, id }) {
             <tbody>
               <tr>
                 <td>HP:</td>
-                <td id="hp">{data.stats[0].base_stat}</td>
+                <td id="hp">
+                  {data.stats.length
+                    ? data.stats[0].base_stat
+                    : il18n.not_found}
+                </td>
               </tr>
               <tr>
                 <td>{il18n.attack}:</td>
-                <td id="attack">{data.stats[1].base_stat}</td>
+                <td id="attack">
+                  {data.stats.length
+                    ? data.stats[1].base_stat
+                    : il18n.not_found}
+                </td>
               </tr>
               <tr>
                 <td>{il18n.defense}:</td>
-                <td id="defense">{data.stats[2].base_stat}</td>
+                <td id="defense">
+                  {data.stats.length
+                    ? data.stats[2].base_stat
+                    : il18n.not_found}
+                </td>
               </tr>
               <tr>
                 <td>{il18n.sp_attack}:</td>
-                <td id="special-attack">{data.stats[3].base_stat}</td>
+                <td id="special-attack">
+                  {data.stats.length
+                    ? data.stats[3].base_stat
+                    : il18n.not_found}
+                </td>
               </tr>
               <tr>
                 <td>{il18n.sp_defense}:</td>
-                <td id="special-defense">{data.stats[4].base_stat}</td>
+                <td id="special-defense">
+                  {data.stats.length
+                    ? data.stats[4].base_stat
+                    : il18n.not_found}
+                </td>
               </tr>
               <tr>
                 <td>{il18n.speed}:</td>
-                <td id="speed">{data.stats[5].base_stat}</td>
+                <td id="speed">
+                  {data.stats.length
+                    ? data.stats[5].base_stat
+                    : il18n.not_found}
+                </td>
               </tr>
             </tbody>
           </table>

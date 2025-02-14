@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
-import { FILTERS_INITIAL_STATE, IL18N } from '../utils/consts'
-import { useFilters } from './useFilters'
-import { useAppContext } from './useAppContext'
-import { useDisableScroll } from './useDisableScroll'
+import { FILTERS_INITIAL_STATE, IL18N } from '../utils/consts.js'
+import { useFilters } from './useFilters.js'
+import { useAppContext } from './useAppContext.js'
+import { useDisableScroll } from './useDisableScroll.js'
+import { useSearch } from './useSearch.js'
 
 export function useFiltersModal({ isOpen, onClose }) {
+  const { resetSearch } = useSearch()
   const { filters, setFilters, resetFilters } = useFilters()
   const [errors, setErrors] = useState([])
   const [selectedMin, setSelectedMin] = useState(filters.minId)
@@ -65,6 +67,7 @@ export function useFiltersModal({ isOpen, onClose }) {
     })
 
     setErrors([])
+    resetSearch()
     onClose()
   }
 

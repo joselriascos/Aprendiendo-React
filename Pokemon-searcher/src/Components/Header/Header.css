@@ -52,6 +52,7 @@
     background-color: var(--background-light);
     color: var(--text-dark);
     padding: 10px;
+    transition: .3s;
 
     &.dark-mode {
       background-color: var(--background-dark);

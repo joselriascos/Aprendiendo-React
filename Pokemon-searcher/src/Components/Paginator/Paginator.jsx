@@ -6,7 +6,7 @@ import {
   DoubleRightIcon,
 } from '../Icons.jsx'
 import { useAppContext } from '../../hooks/useAppContext.js'
-import { usePaginator } from '../../hooks/usePaginator.js'
+import { useContent } from '../../hooks/useContent.js'
 
 export function Paginator() {
   const { theme } = useAppContext()
@@ -18,7 +18,7 @@ export function Paginator() {
     goToFirstPage,
     goToNextPage,
     goToPreviousPage,
-  } = usePaginator()
+  } = useContent()
 
   return (
     <div className={`paginator ${theme === 'dark' ? 'dark-mode' : ''}`}>

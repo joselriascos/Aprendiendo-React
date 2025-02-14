@@ -1,9 +1,11 @@
-import { useAppContext } from './useAppContext'
 import { useState } from 'react'
-import { useSearch } from './useSearch'
-import { useFilters } from './useFilters'
-import { names } from '../utils/names'
-import { checkVisibilityAndScroll } from '../utils/functions'
+import { useAppContext } from './useAppContext.js'
+import { useSearch } from './useSearch.js'
+import { useFilters } from './useFilters.js'
+import { names } from '../utils/names.js'
+import { checkVisibilityAndScroll, resetScroll } from '../utils/functions.js'
+import { useContent } from '../hooks/useContent.js'
+import { useEffect } from 'react'
 
 export function useHeader({
   searchRef,
@@ -11,12 +13,17 @@ export function useHeader({
   suggestionContainerRef,
 }) {
   const { changeLang } = useAppContext()
+  const { goToFirstPage } = useContent()
   const [inputFocused, setInputFocuesed] = useState(false)
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
   const [suggestions, setSuggestions] = useState([])
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const { resetSearch, setSearch } = useSearch()
+  const { resetSearch, setSearch, search } = useSearch()
   const { resetFilters } = useFilters()
+
+  useEffect(() => {
+    if (search === '') searchRef.current.value = ''
+  }, [search])
 
   const openFiltersModal = () => {
     setIsFiltersModalOpen(true)
@@ -72,6 +79,7 @@ export function useHeader({
       setSearch(newSearch)
     }
     searchRef.current.select()
+    resetFilters()
     setSuggestions([])
     setSelectedIndex(0)
   }
@@ -99,6 +107,8 @@ export function useHeader({
   const handleClickHome = () => {
     resetSearch()
     resetFilters()
+    goToFirstPage()
+    resetScroll()
     setSuggestions([])
     searchRef.current.value = ''
     setSelectedIndex(0)
@@ -109,6 +119,7 @@ export function useHeader({
     setSearch(newSearch)
     searchRef.current.value = newSearch
     searchRef.current.select()
+    resetFilters()
     setSuggestions([])
     setSelectedIndex(0)
   }

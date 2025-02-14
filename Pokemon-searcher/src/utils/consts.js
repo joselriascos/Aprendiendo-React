@@ -23,6 +23,7 @@ export const IL18N = {
     error2: 'The minimum value must be greater than',
     error3: 'The maximum value is',
     results_found: 'Results found:',
+    not_found: 'Not found',
   },
   es: {
     search: 'Buscar',
@@ -48,6 +49,7 @@ export const IL18N = {
     error2: 'El valor mínimo debe ser mayor a',
     error3: 'El valor máximo es',
     results_found: 'Resultados encontrados:',
+    not_found: 'No encontrado',
   },
   fr: {
     search: 'Rechercher',
@@ -73,6 +75,7 @@ export const IL18N = {
     error2: 'La valeur minimale doit être supérieure à',
     error3: 'La valeur maximale est',
     results_found: 'Résultats trouvés:',
+    not_found: 'Non trouvé',
   },
   pt: {
     search: 'Procurar',
@@ -98,6 +101,7 @@ export const IL18N = {
     error2: 'O valor mínimo deve ser maior que',
     error3: 'O valor máximo é',
     results_found: 'Resultados encontrados:',
+    not_found: 'Não encontrado',
   },
 }
 
@@ -111,6 +115,12 @@ export const API_POKEMON_FILTERED_BY_TYPE_PREFIX =
   'https://pokeapi.co/api/v2/type/'
 
 export const API_POKEMON_SEARCH_POKEMON = 'https://pokeapi.co/api/v2/pokemon/'
+
+export const POKEMON_IMG_PREFIX =
+  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
+
+export const FALLBACK_IMG =
+  'https://images.vexels.com/media/users/3/134743/isolated/lists/97ae591756f3dc69db88c09fd097319a-emoticon-de-emoji-de-cara-triste.png'
 
 export const FILTERS_INITIAL_STATE = {
   minId: 1,

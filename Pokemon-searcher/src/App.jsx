@@ -1,6 +1,5 @@
 import './App.css'
 import { Header } from './Components/Header/Header.jsx'
-import { Paginator } from './Components/Paginator/Paginator.jsx'
 import { ThreeDot } from 'react-loading-indicators'
 import { useAppContext } from './hooks/useAppContext.js'
 import { lazy, Suspense } from 'react'
@@ -29,7 +28,6 @@ function App() {
       >
         <Content />
       </Suspense>
-      <Paginator />
     </div>
   )
 }

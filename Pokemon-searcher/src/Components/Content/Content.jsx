@@ -1,18 +1,26 @@
+import './Content.css'
 import { ThreeDot } from 'react-loading-indicators'
 import InfoModal from '../InfoModal/InfoModal.jsx'
-import './Content.css'
 import { PokemonResult } from '../PokemonResult.jsx'
 import { useContent } from '../../hooks/useContent.js'
 import { useAppContext } from '../../hooks/useAppContext.js'
 import { IL18N } from '../../utils/consts.js'
 import { useFilters } from '../../hooks/useFilters.js'
 import { useSearch } from '../../hooks/useSearch.js'
-import { usePaginator } from '../../hooks/usePaginator.js'
+import { Paginator } from '../Paginator/Paginator.jsx'
 
 export default function Content() {
-  const { openModal, closeModal, selectedPokemon, resultsNumber } = useContent()
+  const {
+    openModal,
+    closeModal,
+    selectedPokemon,
+    resultsNumber,
+    paginatedResults,
+    page,
+  } = useContent()
+
   //TODO: se está actualizando en el hook pero no aquí -> solucionar
-  const { paginatedResults } = usePaginator()
+
   const { theme, lang, isModalOpen } = useAppContext()
   const { checkFiltersActive } = useFilters()
   const { search } = useSearch()
@@ -43,7 +51,7 @@ export default function Content() {
           return (
             <PokemonResult
               result={result}
-              key={index}
+              key={`${page}-${index}`}
               theme={theme}
               onClick={openModal}
             />
@@ -58,6 +66,7 @@ export default function Content() {
           />
         )}
       </div>
+      <Paginator />
     </div>
   ) : (
     <div
