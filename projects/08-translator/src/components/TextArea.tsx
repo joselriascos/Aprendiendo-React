@@ -22,8 +22,8 @@ const getPlaceholder = ({
   type: SectionType
   loading?: boolean
 }) => {
-  if (type === SectionType.From) return 'Introducir texto'
   if (loading) return 'Cargando...'
+  if (type === SectionType.From) return 'Introducir texto'
   return 'Traducción'
 }
 
@@ -43,6 +43,7 @@ export const TextArea = ({ loading, value, onChange, type }: Props) => {
       placeholder={getPlaceholder({ type, loading })}
       autoFocus={type === SectionType.From}
       style={styles}
+      disabled={type === SectionType.To}
       value={value}
       onChange={handleChange}
     />

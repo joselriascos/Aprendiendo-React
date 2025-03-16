@@ -14,37 +14,57 @@ const initialState: State = {
   loading: false,
 }
 
+// TODO: llevar reducer a carpeta reducers
 export function reducer(state: State, action: Action) {
   const { type } = action
 
   if (type === 'INTERCHANGE_LANGUAGES') {
     if (state.fromLanguage === 'auto') return state
+
+    const loading = state.fromText !== ''
+
     return {
-      ...state,
       fromLanguage: state.toLanguage,
       toLanguage: state.fromLanguage,
+      fromText: state.result,
+      result: '',
+      loading,
     }
   }
 
   if (type === 'SET_FROM_LANGUAGE') {
+    if (state.fromLanguage === action.payload) return state
+
+    const loading = state.fromText !== ''
+
     return {
       ...state,
-      loading: true,
       fromLanguage: action.payload,
+      result: '',
+      loading,
     }
   }
 
   if (type === 'SET_TO_LANGUAGE') {
+    if (state.fromLanguage === action.payload) return state
+
+    const loading = state.fromText !== ''
+
     return {
       ...state,
       toLanguage: action.payload,
+      loading,
+      result: '',
     }
   }
 
   if (type === 'SET_FROM_TEXT') {
+    const loading = action.payload !== ''
+
     return {
       ...state,
       fromText: action.payload,
+      loading,
       result: '',
     }
   }
