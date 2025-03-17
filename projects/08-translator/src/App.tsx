@@ -3,7 +3,7 @@ import './App.css'
 import { useApp } from './hooks/useApp'
 import { Container, Row, Col, Button, Stack } from 'react-bootstrap'
 import { AUTO_LANGUAGE } from './consts'
-import { ArrowsIcon, ClipboardIcon } from './components/Icons'
+import { ArrowsIcon, ClipboardIcon, SpeakerIcon } from './components/Icons'
 import { LanguageSelector } from './components/LanguageSelector'
 import { SectionType } from './types.d'
 import { TextArea } from './components/TextArea'
@@ -27,6 +27,13 @@ function App() {
 
   const handleClipboard = () =>
     navigator.clipboard.writeText(result).catch(() => {})
+
+  const handleSpeak = () => {
+    const speech = new SpeechSynthesisUtterance(result)
+    speech.lang = toLanguage
+    speech.rate = .85
+    speechSynthesis.speak(speech)
+  }
 
   // TODO: pensar en refactorizar llevando esto a useApp
   const debouncedFromText = useDebounce(fromText)
@@ -88,13 +95,22 @@ function App() {
                 onChange={setResult}
                 loading={loading}
               />
-              <Button
-                variant="link"
-                style={{ position: 'absolute', left: 0, bottom: 0 }}
-                onClick={handleClipboard}
+              <div
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  bottom: 0,
+                  display: 'flex',
+                }}
               >
-                <ClipboardIcon />
-              </Button>
+                <Button variant="link" onClick={handleClipboard}>
+                  <ClipboardIcon />
+                </Button>
+
+                <Button variant="link" onClick={handleSpeak}>
+                  <SpeakerIcon />
+                </Button>
+              </div>
             </div>
           </Stack>
         </Col>
