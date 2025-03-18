@@ -1,6 +1,7 @@
 export function DeleteIcon() {
   return (
     <svg
+      aria-label="Remove user"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -20,6 +21,7 @@ export function DeleteIcon() {
 export function EditIcon() {
   return (
     <svg
+      aria-label="Edit user"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
