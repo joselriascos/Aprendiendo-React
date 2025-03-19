@@ -13,12 +13,12 @@ import {
   Title,
 } from '@tremor/react'
 
-export default function ListOfUsers() {
+export function ListOfUsers() {
   const users = useAppSelector((state) => state.users)
   const { removeUser } = useUserActions()
 
   return (
-    <Card className="outline-none ring-gray-400 rounded-sm">
+    <Card className="outline-none ring-gray-400 rounded-sm h-1/2 overflow-y-auto">
       <Title>
         Usuarios
         <Badge className="ml-2 mb-4 rounded-xl text-blue-600 bg-blue-100 ring-0">
@@ -48,15 +48,17 @@ export default function ListOfUsers() {
               <TableCell className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
                 {user.id}
               </TableCell>
-              <TableCell className="flex items-center gap-4">
+              <TableCell className="flex items-center gap-4 max-w-80">
                 <img
                   className="w-8 h-8 rounded-full object-cover"
                   src={`https://unavatar.io/${user.github}`}
                   alt={user.name}
                 />
-                {user.name}
+                <p className="truncate">{user.name}</p>
               </TableCell>
-              <TableCell>{user.email}</TableCell>
+              <TableCell className="max-w-80">
+                <p className="truncate">{user.email}</p>
+              </TableCell>
               <TableCell className="flex items-center gap-4 justify-left">
                 <button
                   type="button"

@@ -12,7 +12,7 @@ export interface UserWithId extends User {
   id: UserId
 }
 
-const initialState: UserWithId[] = [
+const DEFAULT_STATE = [
   {
     id: '1',
     name: 'Jose Riascos',
@@ -45,17 +45,33 @@ const initialState: UserWithId[] = [
   },
 ]
 
+const initialState: UserWithId[] = (() => {
+  const persistedState = localStorage.getItem('__redux_state__')
+  return persistedState ? JSON.parse(persistedState).users : DEFAULT_STATE
+})()
+
 export const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
+    addNewUser: (state, action: PayloadAction<User>) => {
+      const id = crypto.randomUUID()
+      const newUser = { ...action.payload, id }
+      state.push(newUser)
+    },
     deleteUserById: (state, action: PayloadAction<UserId>) => {
       const userId = action.payload
-      return (state = state.filter((user) => user.id !== userId))
+      return state.filter((user) => user.id !== userId)
+    },
+    rollbackUser: (state, action: PayloadAction<UserWithId>) => {
+      const isUserAlreadyDefined = state.some(
+        (user) => user.id === action.payload.id
+      )
+      if (!isUserAlreadyDefined) state.push(action.payload)
     },
   },
 })
 
 export default usersSlice.reducer
 
-export const { deleteUserById } = usersSlice.actions
+export const { addNewUser, deleteUserById, rollbackUser } = usersSlice.actions
