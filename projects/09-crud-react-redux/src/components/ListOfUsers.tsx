@@ -1,6 +1,5 @@
 import { DeleteIcon, EditIcon } from './Icons'
 import { useAppSelector } from '../hooks/store'
-import { useUserActions } from '../hooks/useUserActions'
 import { CreateNewUser } from './CreateNewUser'
 import { useState } from 'react'
 import { UserWithId } from '../store/users/slice'
@@ -16,9 +15,15 @@ import {
   Title,
 } from '@tremor/react'
 import { EditExistingUser } from './EditExistingUser'
+import { ConfirmDialog } from './ConfirmDialog'
 
 interface ModalState {
   type: 'add' | 'edit' | null
+  user: UserWithId | null
+}
+
+interface DialogState {
+  isOpen: boolean
   user: UserWithId | null
 }
 
@@ -33,13 +38,21 @@ export function ListOfUsers() {
   const openEditModal = (user: UserWithId) =>
     setModalState({ type: 'edit', user })
 
+  const [dialogState, setDialogOpen] = useState<DialogState>({
+    isOpen: false,
+    user: null,
+  })
+
+  const openDialog = (user: UserWithId) =>
+    setDialogOpen({ isOpen: true, user: user })
+  const closeDialog = () => setDialogOpen({ isOpen: false, user: null })
+
   const users = useAppSelector((state) => state.users)
-  const { removeUser } = useUserActions()
 
   return (
     <>
-      <Card className="outline-none ring-gray-400 rounded-sm h-full overflow-y-auto">
-        <div className="flex justify-between items-center mb-4">
+      <Card className="outline-none ring-gray-400 rounded-sm h-full overflow-y-auto min-w-[250px]">
+        <div className="flex justify-between items-center mb-4 gap-4">
           <Title className="flex items-center">
             <span>Usuarios</span>
             <Badge className="ml-2 rounded-xl text-blue-600 bg-blue-100 ring-0">
@@ -48,7 +61,7 @@ export function ListOfUsers() {
           </Title>
           <button
             type="button"
-            className="px-4 py-2 flex align-top bg-blue-500 text-white rounded-lg hover:bg-blue-800 transition"
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-800 transition"
             onClick={openAddModal}
           >
             Añadir Usuario
@@ -92,7 +105,8 @@ export function ListOfUsers() {
                   <button
                     type="button"
                     className="hover:text-black transition"
-                    onClick={() => removeUser(user.id)}
+                    // onClick={() => removeUser(user.id)}
+                    onClick={() => openDialog(user)}
                   >
                     <DeleteIcon />
                   </button>
@@ -123,6 +137,11 @@ export function ListOfUsers() {
           user={modalState.user}
         />
       )}
+      <ConfirmDialog
+        isOpen={dialogState.isOpen}
+        onClose={closeDialog}
+        user={dialogState.user}
+      />
     </>
   )
 }

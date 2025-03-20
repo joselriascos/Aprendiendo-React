@@ -113,7 +113,7 @@ export const syncWithDatabase: Middleware =
           if (previusUser) store.dispatch(rollbackUser(previusUser))
           console.log(err)
           console.log(
-            'si devuelve error 500 probablemente es porque la API de prueba no admite PUTs entonces se hacer rollback'
+            'si devuelve error 500 probablemente es porque la API de prueba no admite PUTs entonces se hace rollback'
           )
         })
     }

@@ -1,1 +1,1 @@
-- Dialog antes de eliminar
+- Refactorizar
