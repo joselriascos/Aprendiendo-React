@@ -1,3 +1,1 @@
-- Sooner al guardar usuario
-- Opción para editar registro
-- Agregar y editar usuario en modales
+- Dialog antes de eliminar

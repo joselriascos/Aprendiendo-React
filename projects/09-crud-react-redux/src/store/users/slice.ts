@@ -54,24 +54,49 @@ export const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    addNewUser: (state, action: PayloadAction<User>) => {
-      const id = crypto.randomUUID()
-      const newUser = { ...action.payload, id }
+    addNewUser: (state, action: PayloadAction<UserWithId>) => {
+      const newUser = action.payload
       state.push(newUser)
     },
+
     deleteUserById: (state, action: PayloadAction<UserId>) => {
       const userId = action.payload
       return state.filter((user) => user.id !== userId)
     },
+
+    deleteUserByIdOnError: (state, action: PayloadAction<UserId>) => {
+      const userId = action.payload
+      return state.filter((user) => user.id !== userId)
+    },
+
+    updateUser: (state, action: PayloadAction<UserWithId>) => {
+      const updatedUser = action.payload
+      const { id } = updatedUser
+      const userIndex = state.findIndex((user) => user.id === id)
+      if (state[userIndex] !== updatedUser) state[userIndex] = updatedUser
+    },
+
     rollbackUser: (state, action: PayloadAction<UserWithId>) => {
-      const isUserAlreadyDefined = state.some(
-        (user) => user.id === action.payload.id
+      const userToRollback = action.payload
+      const isUserIdAlreadyDefined = state.some(
+        (user) => user.id === userToRollback.id
       )
-      if (!isUserAlreadyDefined) state.push(action.payload)
+      if (!isUserIdAlreadyDefined) {
+        state.push(userToRollback)
+        return
+      }
+      const userIndex = state.findIndex((user) => user.id === userToRollback.id)
+      state[userIndex] = userToRollback
     },
   },
 })
 
 export default usersSlice.reducer
 
-export const { addNewUser, deleteUserById, rollbackUser } = usersSlice.actions
+export const {
+  addNewUser,
+  updateUser,
+  deleteUserByIdOnError,
+  deleteUserById,
+  rollbackUser,
+} = usersSlice.actions

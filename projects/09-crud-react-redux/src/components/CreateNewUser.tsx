@@ -1,10 +1,19 @@
 import { Badge, Button, Card, TextInput, Title } from '@tremor/react'
 import { useUserActions } from '../hooks/useUserActions'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import Modal from 'react-modal'
 
-export function CreateNewUser() {
+Modal.setAppElement('#root')
+
+interface Props {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export function CreateNewUser({ isOpen, onClose }: Props) {
   const { addUser } = useUserActions()
   const [result, setResult] = useState<'ok' | 'error' | null>(null)
+  const nameInputRef = useRef<HTMLInputElement>(null)
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -24,57 +33,78 @@ export function CreateNewUser() {
     addUser({ name, email, github })
     setResult('ok')
     form.reset()
+    nameInputRef.current?.focus()
   }
 
   return (
-    <Card className="mt-4 outline-none ring-gray-400 rounded-sm">
-      <Title className="mb-4">Crear Nuevo Usuario</Title>
-
-      <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-        <TextInput
-          name="name"
-          className="rounded"
-          placeholder="Aquí el nombre"
-        />
-        <TextInput
-          name="email"
-          type="email"
-          className="rounded"
-          placeholder="Aquí el email"
-        />
-        <TextInput
-          name="github"
-          className="rounded"
-          placeholder="Aquí el usuario de GitHub"
-        />
-
-        <div className="flex flex-col justify-center items-center gap-4 mt-4">
-          <Button
-            type="submit"
-            className="bg-gray-200 rounded hover:bg-gray-100 transition w-1/3 min-w-min"
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      className="fixed inset-0 place-self-center outline-none bg-white flex items-center h-1/2 w-1/2 min-w-72"
+    >
+      <Card className="outline-none ring-gray-400 rounded-sm">
+        <div className="flex items-center justify-between mb-4">
+          <Title>Crear Nuevo Usuario</Title>
+          <button
+            type="button"
+            className="px-4 py-2 flex align-top bg-blue-500 text-white rounded-lg hover:bg-blue-800 transition"
+            onClick={onClose}
           >
-            Crear usuario
-          </Button>
-          <span>
-            {result === 'ok' && (
-              <Badge
-                onClick={() => setResult(null)}
-                className="bg-green-100 rounded-lg text-white ring-0 cursor-pointer text-green-600 font-medium"
-              >
-                Guardado correctamente
-              </Badge>
-            )}
-            {result === 'error' && (
-              <Badge
-                onClick={() => setResult(null)}
-                className="bg-red-100 rounded-lg text-white ring-0 cursor-pointer text-red-600 font-medium"
-              >
-                Error con los campos
-              </Badge>
-            )}
-          </span>
+            Volver
+          </button>
         </div>
-      </form>
-    </Card>
+
+        <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+          <TextInput
+            name="name"
+            className="rounded"
+            placeholder="Aquí el nombre"
+            ref={nameInputRef}
+            autoFocus
+            autoComplete="off"
+          />
+          <TextInput
+            name="email"
+            type="email"
+            className="rounded"
+            placeholder="Aquí el email"
+            autoComplete="off"
+          />
+          <TextInput
+            name="github"
+            className="rounded"
+            placeholder="Aquí el usuario de GitHub"
+            autoComplete="off"
+          />
+
+          <div className="flex flex-col justify-center items-center gap-4 mt-4">
+            <Button
+              type="submit"
+              className="bg-gray-200 rounded hover:bg-gray-100 transition w-1/3 min-w-min"
+            >
+              Crear usuario
+            </Button>
+            <span>
+              {result === 'ok' && (
+                <Badge
+                  onClick={() => setResult(null)}
+                  className="bg-green-100 rounded-lg text-white ring-0 cursor-pointer text-green-600 font-medium"
+                >
+                  Guardado correctamente
+                </Badge>
+              )}
+              {result === 'error' && (
+                <Badge
+                  onClick={() => setResult(null)}
+                  className="bg-red-100 rounded-lg text-white ring-0 cursor-pointer text-red-600 font-medium"
+                >
+                  Error con los campos
+                </Badge>
+              )}
+            </span>
+          </div>
+        </form>
+      </Card>
+    </Modal>
   )
 }
