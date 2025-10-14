@@ -35,10 +35,10 @@ export function ConfirmDialog({ isOpen, onClose, user }: Props) {
         </div>
         <form className="text-gray-600">
           <h4 className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong text-black mb-8">
-            Eliminar usuario
+            Delete user
           </h4>
           <p className="text-tremor-default leading-6 text-tremor-content dark:text-dark-tremor-content">
-            ¿Estás seguro(a) que deseas eliminar al usuario{' '}
+            ¿Are you sure you want to delete the user{' '}
             <strong className="font-medium">{name}</strong>?
           </p>
           <div className="flex justify-between mt-8">
@@ -47,14 +47,14 @@ export function ConfirmDialog({ isOpen, onClose, user }: Props) {
               onClick={() => handleConfirm({ id })}
               className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-800 transition"
             >
-              Sí, eliminar
+              Yes, delete
             </button>
             <button
               type="button"
               onClick={onClose}
               className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-800 transition"
             >
-              No, cancelar
+              No, cancel
             </button>
           </div>
         </form>

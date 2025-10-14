@@ -44,13 +44,13 @@ export function CreateNewUser({ isOpen, onClose }: Props) {
     >
       <Card className="outline-none ring-gray-400 rounded-sm">
         <div className="flex items-center justify-between mb-4">
-          <Title>Crear Nuevo Usuario</Title>
+          <Title>Create new user</Title>
           <button
             type="button"
             className="px-4 py-2 flex align-top bg-blue-500 text-white rounded-lg hover:bg-blue-800 transition"
             onClick={onClose}
           >
-            Volver
+            Go back
           </button>
         </div>
 
@@ -82,23 +82,23 @@ export function CreateNewUser({ isOpen, onClose }: Props) {
               type="submit"
               className="bg-gray-200 rounded hover:bg-gray-100 transition w-1/3 min-w-min"
             >
-              Crear usuario
+              Create user
             </Button>
             <span>
               {result === 'ok' && (
                 <Badge
                   onClick={() => setResult(null)}
-                  className="bg-green-100 rounded-lg text-white ring-0 cursor-pointer text-green-600 font-medium"
+                  className="bg-green-100 rounded-lg ring-0 cursor-pointer text-green-600 font-medium"
                 >
-                  Guardado correctamente
+                  Saved successfully
                 </Badge>
               )}
               {result === 'error' && (
                 <Badge
                   onClick={() => setResult(null)}
-                  className="bg-red-100 rounded-lg text-white ring-0 cursor-pointer text-red-600 font-medium"
+                  className="bg-red-100 rounded-lg ring-0 cursor-pointer text-red-600 font-medium"
                 >
-                  Error con los campos
+                  Error with fields
                 </Badge>
               )}
             </span>

@@ -54,13 +54,13 @@ export function EditExistingUser({ isOpen, onClose, user }: Props) {
     >
       <Card className="outline-none ring-gray-400 rounded-sm">
         <div className="flex items-center justify-between mb-4">
-          <Title>Editar Usuario</Title>
+          <Title>Edit user</Title>
           <button
             type="button"
             className="px-4 py-2 flex align-top bg-blue-500 text-white rounded-lg hover:bg-blue-800 transition"
             onClick={onClose}
           >
-            Volver
+            Go back
           </button>
         </div>
 
@@ -80,7 +80,7 @@ export function EditExistingUser({ isOpen, onClose, user }: Props) {
 
           <div className="flex justify-between gap-4 items-center mt-2">
             <label htmlFor="name" className="font-medium">
-              Nombre
+              Name
             </label>
             <TextInput
               name="name"
@@ -128,31 +128,31 @@ export function EditExistingUser({ isOpen, onClose, user }: Props) {
               type="submit"
               className="bg-gray-200 rounded hover:bg-gray-100 transition w-1/3 min-w-min"
             >
-              Guardar
+              Save
             </Button>
             <span>
               {result === 'ok' && (
                 <Badge
                   onClick={() => setResult(null)}
-                  className="bg-green-100 rounded-lg text-white ring-0 cursor-pointer text-green-600 font-medium"
+                  className="bg-green-100 rounded-lg ring-0 cursor-pointer text-green-600 font-medium"
                 >
-                  Usuario editado correctamente
+                  User edited successfully
                 </Badge>
               )}
               {result === 'error-missing' && (
                 <Badge
                   onClick={() => setResult(null)}
-                  className="bg-red-100 rounded-lg text-white ring-0 cursor-pointer text-red-600 font-medium"
+                  className="bg-red-100 rounded-lg ring-0 cursor-pointer text-red-600 font-medium"
                 >
-                  Hay campos sin llenar
+                  There are missing fields
                 </Badge>
               )}
               {result === 'error-same' && (
                 <Badge
                   onClick={() => setResult(null)}
-                  className="bg-red-100 rounded-lg text-white ring-0 cursor-pointer text-red-600 font-medium"
+                  className="bg-red-100 rounded-lg ring-0 cursor-pointer text-red-600 font-medium"
                 >
-                  No se han detectado cambios
+                  No changes were made
                 </Badge>
               )}
             </span>

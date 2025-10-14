@@ -12,38 +12,40 @@ export interface UserWithId extends User {
   id: UserId
 }
 
-const DEFAULT_STATE = [
-  {
-    id: '1',
-    name: 'Jose Riascos',
-    email: 'joseluis.riascos10@gmail.com',
-    github: 'joselriascos',
-  },
-  {
-    id: '2',
-    name: 'Emily Jhonson',
-    email: 'emily.jhonson@gmail.com',
-    github: 'emilys',
-  },
-  {
-    id: '3',
-    name: 'Miguel Durán',
-    email: 'midudev@gmail.com',
-    github: 'midudev',
-  },
-  {
-    id: '4',
-    name: 'Sofia Rodriguez',
-    email: 'sofia.rodriguez@gmail.com',
-    github: 'sofiarod',
-  },
-  {
-    id: '5',
-    name: 'Emma Miller',
-    email: 'emma.miller@gmail.com',
-    github: 'emmaj',
-  },
-]
+// const DEFAULT_STATE = [
+//   {
+//     id: '1',
+//     name: 'Jose Riascos',
+//     email: 'joseluis.riascos10@gmail.com',
+//     github: 'joselriascos',
+//   },
+//   {
+//     id: '2',
+//     name: 'Emily Jhonson',
+//     email: 'emily.jhonson@gmail.com',
+//     github: 'emilys',
+//   },
+//   {
+//     id: '3',
+//     name: 'Miguel Durán',
+//     email: 'midudev@gmail.com',
+//     github: 'midudev',
+//   },
+//   {
+//     id: '4',
+//     name: 'Sofia Rodriguez',
+//     email: 'sofia.rodriguez@gmail.com',
+//     github: 'sofiarod',
+//   },
+//   {
+//     id: '5',
+//     name: 'Emma Miller',
+//     email: 'emma.miller@gmail.com',
+//     github: 'emmaj',
+//   },
+// ]
+
+const DEFAULT_STATE: UserWithId[] = []
 
 const initialState: UserWithId[] = (() => {
   const persistedState = localStorage.getItem('__redux_state__')

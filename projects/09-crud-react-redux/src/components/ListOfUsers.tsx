@@ -54,7 +54,7 @@ export function ListOfUsers() {
       <Card className="outline-none ring-gray-400 rounded-sm h-full overflow-y-auto min-w-[250px]">
         <div className="flex justify-between items-center mb-4 gap-4">
           <Title className="flex items-center">
-            <span>Usuarios</span>
+            <span>Users</span>
             <Badge className="ml-2 rounded-xl text-blue-600 bg-blue-100 ring-0">
               {users.length}
             </Badge>
@@ -64,7 +64,7 @@ export function ListOfUsers() {
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-800 transition"
             onClick={openAddModal}
           >
-            Añadir Usuario
+            Add User
           </button>
         </div>
         <Table className="text-gray-600">
@@ -74,13 +74,13 @@ export function ListOfUsers() {
                 Id
               </TableHeaderCell>
               <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                Nombre
+                Name
               </TableHeaderCell>
               <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
                 Email
               </TableHeaderCell>
               <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                Acciones
+                Actions
               </TableHeaderCell>
             </TableRow>
           </TableHead>
@@ -93,7 +93,7 @@ export function ListOfUsers() {
                 <TableCell className="flex items-center gap-4 max-w-80">
                   <img
                     className="w-8 h-8 rounded-full object-cover"
-                    src={`https://unavatar.io/${user.github}`}
+                    src={`https://ui-avatars.com/api/?name=${user.name}`}
                     alt={user.name}
                   />
                   <span className="truncate">{user.name}</span>
