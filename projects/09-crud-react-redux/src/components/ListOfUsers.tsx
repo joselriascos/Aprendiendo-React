@@ -93,7 +93,7 @@ export function ListOfUsers() {
                 <TableCell className="flex items-center gap-4 max-w-80">
                   <img
                     className="w-8 h-8 rounded-full object-cover"
-                    src={`https://ui-avatars.com/api/?name=${user.name}`}
+                    src={`https://ui-avatars.com/api/?name=${user.name}&background=random`}
                     alt={user.name}
                   />
                   <span className="truncate">{user.name}</span>
