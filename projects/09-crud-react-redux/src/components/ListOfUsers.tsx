@@ -54,7 +54,7 @@ export function ListOfUsers() {
       <Card className="outline-none ring-gray-400 rounded-sm h-full overflow-y-auto min-w-[250px]">
         <div className="flex justify-between items-center mb-4 gap-4">
           <Title className="flex items-center">
-            <span>Users</span>
+            <span className='text-tremor-content-default dark:text-slate-600'>Users</span>
             <Badge className="ml-2 rounded-xl text-blue-600 bg-blue-100 ring-0">
               {users.length}
             </Badge>
