@@ -50,7 +50,7 @@ export function EditExistingUser({ isOpen, onClose, user }: Props) {
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      className="fixed inset-0 place-self-center outline-none bg-white flex items-center h-1/2 w-1/2 min-w-72"
+      className="fixed inset-0 place-self-center outline-none bg-white flex items-center w-1/2 min-w-72"
     >
       <Card className="outline-none ring-gray-400 rounded-sm">
         <div className="flex items-center justify-between mb-4">
